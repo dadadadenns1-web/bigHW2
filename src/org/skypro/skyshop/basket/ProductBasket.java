@@ -59,7 +59,7 @@ public class ProductBasket {
             if (product == null) {
                 continue;
             }
-            if (product.getName().equals(nameForSearch)) {
+            if (product.getName().equalsIgnoreCase(nameForSearch)) {
                 return true;
             }
         }
