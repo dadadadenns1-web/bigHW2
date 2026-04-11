@@ -14,7 +14,7 @@ public class App {
         Product productSix = new Product("Подушка",3000);
 
         ProductBasket basket = new ProductBasket();
-        basket.addProduct(productOne);//Добавление продукта в корзину.
+        basket.addProduct(productOne);//Добавление продукта в корзину
         basket.addProduct(productTwo);
         basket.addProduct(productThree);
         basket.addProduct(productFour);
