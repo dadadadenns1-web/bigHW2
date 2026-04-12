@@ -11,7 +11,7 @@ public class ProductBasket {
         basket = new Product[5];//В качестве хранилища для объектов product используйте массив из пяти элементов
     }
 
-    //Метод добавления продукта в корзину: метод принимает в себя продукт и ничего не возвращает.
+    //Метод добавления продукта в корзину: метод принимает в себя продукт и ничего не возвращает
     public void addProduct(Product product) {
         for (int i = 0; i < basket.length; i++) {
             if (basket[i] != null) {
