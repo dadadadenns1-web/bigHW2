@@ -9,6 +9,7 @@ import org.skypro.skyshop.product.SimpleProduct;
 public class App {
     public static void main(String[] args) {
         //Создание продуктов
+        //Создайте в методе main несколько товаров специальных типов вместо SimpleProduct.
         Product productOne = new SimpleProduct("Кресло",5000);
         Product productTwo = new DiscountedProduct("Диван",10000,20);
         Product productThree = new DiscountedProduct("Стол",8000,50);
