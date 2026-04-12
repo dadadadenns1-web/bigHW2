@@ -5,6 +5,7 @@ package org.skypro.skyshop.product;
 public abstract class Product {
 
     private final String name;
+    //В классе Product нет поля price
 
     public Product(String name) {
         this.name = name;
