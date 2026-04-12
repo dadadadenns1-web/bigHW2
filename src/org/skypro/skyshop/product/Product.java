@@ -1,6 +1,7 @@
 package org.skypro.skyshop.product;
 
 //Класс Product станет новым корнем иерархии, от него будем наследовать специфические классы товаров.
+//Product объявлен как abstract
 public abstract class Product {
 
     private final String name;
