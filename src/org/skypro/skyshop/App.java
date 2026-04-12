@@ -19,7 +19,7 @@ public class App {
         basket.addProduct(productThree);
         basket.addProduct(productFour);
         basket.addProduct(productFive);
-        basket.addProduct(productSix);//Добавление продукта в заполненную корзину, в которой нет свободного места.
+        basket.addProduct(productSix);//Добавление продукта в заполненную корзину, в которой нет свободного места
 
         ProductBasket basketTwo = new ProductBasket();//Для демонстрации классов можно создать несколько корзин.
         basketTwo.addProduct(productSix);
