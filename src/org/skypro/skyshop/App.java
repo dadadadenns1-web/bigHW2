@@ -83,7 +83,7 @@ public class App {
         for (Article article : articleList) {
             searchList.add(article);
         }
-        //Добавление не по условиям, но предусмотренное в классе Product
+        //Добавление не включенное в условие, но предусмотренное для класса Product
         for (Product product : productList) {
             searchList.add(product);
         }
