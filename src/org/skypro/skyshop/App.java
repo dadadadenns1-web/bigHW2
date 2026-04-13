@@ -94,6 +94,11 @@ public class App {
         printSearch("абвгд",searchList);
         printSeparator();
 
+        //Проверка toString у класса Article
+        System.out.println("Проверка toString у класса Article");
+        System.out.println(articleList[3]);
+        printSeparator();
+
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used
         basket.addProduct(discounted);
         basket.addProduct(simpleProduct);
