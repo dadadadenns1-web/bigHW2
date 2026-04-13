@@ -1,23 +1,38 @@
 package org.skypro.skyshop.product;
 
-public class Product {
-    //Поля name и price объявлены как private final
-    private final String name;
-    private final int price;
+import org.skypro.skyshop.product.searchEngine.Searchable;
 
-    //Конструктор с параметрами в классе Product принимает name и price и инициализирует поля
-    public Product(String name, int price) {
+//Класс Product станет новым корнем иерархии, от него будем наследовать специфические классы товаров.
+//Product объявлен как abstract
+public abstract class Product implements Searchable {
+
+    private final String name;
+    //В классе Product нет поля price
+
+    public Product(String name) {
         this.name = name;
-        this.price = price;
     }
 
-    //Геттеры есть, сеттеры отсутствуют
     public String getName() {
         return name;
     }
-    public int getPrice() {
-        return price;
+
+    //метод getPrice() должен стать абстрактным.
+    public abstract int getPrice();
+
+    // В этом задании нельзя использовать оператор instanceof или другие методы, которые определяют класс товара.
+    // Используйте переопределение методов или вводите новые методы.
+    public abstract boolean isSpecial();
+
+    //В классе товаров нужно имплементировать интерфейс Searchable в родительском классе товаров
+    // и в качестве search term — «возвращать имя товара», а в качестве типа — возвращать строку PRODUCT.
+    @Override
+    public String getSearchTerm() {
+        return name;
     }
 
-
+    @Override
+    public String getContent() {
+        return "PRODUCT";
+    }
 }
