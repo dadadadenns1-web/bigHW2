@@ -1,6 +1,6 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.productAndArticle.product;
 
-public class FixPriceProduct extends Product{
+public class FixPriceProduct extends Product {
 
     //Цена назначается один раз в год, поэтому в данный момент ее выгоднее установить в коде, используя константу.
     //Саму фиксированную цену нужно оформить в виде приватной константы в классе FixPriceProduct.

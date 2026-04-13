@@ -1,4 +1,4 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.productAndArticle.product;
 
 //сделайте класc SimpleProduct, который наследуется от Product
 // и принимает в свой конструктор (кроме имени) обычную цену товара, а переопределенный метод getPrice возвращает эту цену.
@@ -6,7 +6,7 @@ public class SimpleProduct extends Product {
 
     private int price;
 
-    public SimpleProduct(String name,int price){
+    public SimpleProduct(String name, int price) {
         super(name);
         this.price = price;
 
@@ -19,11 +19,16 @@ public class SimpleProduct extends Product {
 
     @Override
     public String toString() {
-        return getName()+": "+getPrice();
+        return getName() + ": " + getPrice();
     }
 
     @Override
     public boolean isSpecial() {
         return false;
+    }
+
+    //Сеттер чтоб не жаловался компилятор. По идее цена должна быть изменяемой
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

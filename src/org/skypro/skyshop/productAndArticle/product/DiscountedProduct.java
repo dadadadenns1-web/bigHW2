@@ -1,4 +1,4 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.productAndArticle.product;
 
 // сделайте класс товара со скидкой DiscountedProduct Этот класс нужно унаследовать от Product.
 public class DiscountedProduct extends Product {
@@ -16,17 +16,28 @@ public class DiscountedProduct extends Product {
     //Переопределите метод getPrice так, чтобы он учитывал скидку, которую вы применили к товару.
     @Override
     public int getPrice() {
-        return basePrice - (basePrice*discountInPercentage)/100;
+        return basePrice - (basePrice * discountInPercentage) / 100;
     }
 
 
     @Override
     public String toString() {
-        return getName()+": "+ getPrice()+" ("+discountInPercentage+"%)";
+        return getName() + ": " + getPrice() + " (" + discountInPercentage + "%)";
     }
 
     @Override
     public boolean isSpecial() {
         return true;
     }
+
+    //Сеттеры чтоб компилятор не жаловался на отсутствие final. По идее должны быть изменяемы
+    public void setBasePrice(int basePrice) {
+        this.basePrice = basePrice;
+    }
+    public void setDiscountInPercentage(int discountInPercentage) {
+        this.discountInPercentage = discountInPercentage;
+    }
 }
+
+
+
