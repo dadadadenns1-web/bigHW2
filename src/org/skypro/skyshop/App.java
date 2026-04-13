@@ -107,7 +107,7 @@ public class App {
         simpleProduct.setPrice(6000);
         System.out.println("Проверка изменений");
         basket.printProducts();
-        //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used
+        //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used.
     }
     public static void printSeparator(){
         System.out.println("==========");
