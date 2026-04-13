@@ -1,6 +1,6 @@
 package org.skypro.skyshop.product;
 
-import org.skypro.skyshop.searchEngine.Searchable;
+import org.skypro.skyshop.product.searchEngine.Searchable;
 
 //Класс Product станет новым корнем иерархии, от него будем наследовать специфические классы товаров.
 //Product объявлен как abstract

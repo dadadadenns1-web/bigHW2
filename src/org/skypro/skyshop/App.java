@@ -1,8 +1,8 @@
 package org.skypro.skyshop;
 
-import org.skypro.skyshop.searchEngine.SearchEngine;
-import org.skypro.skyshop.searchEngine.Searchable;
-import org.skypro.skyshop.article.Article;
+import org.skypro.skyshop.product.searchEngine.SearchEngine;
+import org.skypro.skyshop.product.searchEngine.Searchable;
+import org.skypro.skyshop.product.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;

@@ -1,6 +1,6 @@
-package org.skypro.skyshop.article;
+package org.skypro.skyshop.product.article;
 
-import org.skypro.skyshop.searchEngine.Searchable;
+import org.skypro.skyshop.product.searchEngine.Searchable;
 
 //Объектная модель статьи о товарах.
 //Для этого создайте класс Article
