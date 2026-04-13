@@ -87,7 +87,7 @@ public class App {
         for (Product product : productList) {
             searchList.add(product);
         }
-        printSearch("див",searchList);
+        printSearch("ст",searchList);
         printSeparator();
         printSearch("",searchList);
         printSeparator();
