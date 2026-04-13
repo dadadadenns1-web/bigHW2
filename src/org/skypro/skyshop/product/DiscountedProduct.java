@@ -1,4 +1,4 @@
-package org.skypro.skyshop.productAndArticle.product;
+package org.skypro.skyshop.product;
 
 // сделайте класс товара со скидкой DiscountedProduct Этот класс нужно унаследовать от Product.
 public class DiscountedProduct extends Product {

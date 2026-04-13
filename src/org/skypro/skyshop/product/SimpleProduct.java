@@ -1,4 +1,4 @@
-package org.skypro.skyshop.productAndArticle.product;
+package org.skypro.skyshop.product;
 
 //сделайте класc SimpleProduct, который наследуется от Product
 // и принимает в свой конструктор (кроме имени) обычную цену товара, а переопределенный метод getPrice возвращает эту цену.

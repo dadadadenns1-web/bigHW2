@@ -1,13 +1,13 @@
 package org.skypro.skyshop;
 
-import org.skypro.skyshop.productAndArticle.searchEngine.SearchEngine;
-import org.skypro.skyshop.productAndArticle.searchEngine.Searchable;
-import org.skypro.skyshop.productAndArticle.article.Article;
+import org.skypro.skyshop.searchEngine.SearchEngine;
+import org.skypro.skyshop.searchEngine.Searchable;
+import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
-import org.skypro.skyshop.productAndArticle.product.DiscountedProduct;
-import org.skypro.skyshop.productAndArticle.product.FixPriceProduct;
-import org.skypro.skyshop.productAndArticle.product.Product;
-import org.skypro.skyshop.productAndArticle.product.SimpleProduct;
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
+import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
 
 public class App {
     public static void main(String[] args) {
@@ -95,12 +95,12 @@ public class App {
         printSeparator();
 
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used
-        System.out.println("Проверка изменений");
         basket.addProduct(discounted);
         basket.addProduct(simpleProduct);
         discounted.setBasePrice(20000);
         discounted.setDiscountInPercentage(50);
         simpleProduct.setPrice(6000);
+        System.out.println("Проверка изменений");
         basket.printProducts();
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used
     }

@@ -1,4 +1,4 @@
-package org.skypro.skyshop.productAndArticle.product;
+package org.skypro.skyshop.product;
 
 public class FixPriceProduct extends Product {
 
