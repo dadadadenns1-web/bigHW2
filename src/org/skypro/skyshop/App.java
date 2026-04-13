@@ -88,8 +88,11 @@ public class App {
             searchList.add(product);
         }
         printSearch("див",searchList);
+        printSeparator();
         printSearch("",searchList);
+        printSeparator();
         printSearch("абвгд",searchList);
+        printSeparator();
 
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used
         System.out.println("Проверка изменений");
@@ -118,6 +121,5 @@ public class App {
         if(!resultExist){
             System.out.println("Ничего не найдено");
         }
-        printSeparator();
     }
 }
