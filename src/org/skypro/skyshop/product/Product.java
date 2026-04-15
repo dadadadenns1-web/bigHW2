@@ -9,7 +9,11 @@ public abstract class Product implements Searchable {
     private final String name;
     //В классе Product нет поля price
 
+    //В конструкторе класса Product реализуйте проверку. Название продукта не может быть пустой строкой или null
     public Product(String name) {
+        if(name == null || name.isBlank()){//Использовано условие name == null || name.isBlank()
+            throw new IllegalArgumentException("Название продукта не может быть пустой строкой или null");//выброшено IllegalArgumentException
+        }
         this.name = name;
     }
 
@@ -35,4 +39,5 @@ public abstract class Product implements Searchable {
     public String getContent() {
         return "PRODUCT";
     }
+
 }

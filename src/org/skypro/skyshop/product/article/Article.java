@@ -10,6 +10,9 @@ public class Article implements Searchable {
     private final String text;//текст статьи в виде строки
 
     public Article(String title, String text) {
+        if(title == null || text == null){
+            throw new IllegalArgumentException("Заголовок или текст не может быть null");
+        }
         this.title = title;
         this.text = text;
     }

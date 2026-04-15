@@ -1,13 +1,14 @@
 package org.skypro.skyshop;
 
-import org.skypro.skyshop.product.searchEngine.SearchEngine;
-import org.skypro.skyshop.product.searchEngine.Searchable;
-import org.skypro.skyshop.product.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.product.article.Article;
+import org.skypro.skyshop.product.searchEngine.BestResultNotFound;
+import org.skypro.skyshop.product.searchEngine.SearchEngine;
+import org.skypro.skyshop.product.searchEngine.Searchable;
 
 public class App {
     public static void main(String[] args) {
@@ -87,16 +88,16 @@ public class App {
         for (Product product : productList) {
             searchList.add(product);
         }
-        printSearch("ст",searchList);
+        printSearch("ст", searchList);
         printSeparator();
-        printSearch("",searchList);
+        printSearch("", searchList);
         printSeparator();
-        printSearch("абвгд",searchList);
+        printSearch("абвгд", searchList);
         printSeparator();
 
         //Проверка toString у класса Article
         System.out.println("Проверка toString у класса Article");
-        System.out.println(articleList[3]);
+        System.out.println(articleList[2]);
         printSeparator();
 
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used
@@ -107,24 +108,78 @@ public class App {
         simpleProduct.setPrice(6000);
         System.out.println("Проверка изменений");
         basket.printProducts();
+        printSeparator();
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used.
+
+        //Проверка exception
+        //В качестве обработки можно просто выводить сообщение из исключения.
+        //Создайте несколько продуктов и нарочно заполните их поля неправильно.
+        //Затем обработайте IllegalArgumentException в блоках try и catch.
+        try {
+            Product productExc1 = new DiscountedProduct("Компьютерная мышка", 2500, 10);
+            System.out.println(productExc1.getName() + " - товар со скидкой создан");
+            Product productExc2 = new DiscountedProduct("Клавиатура", -5000, 20);
+            System.out.println(productExc2.getName() + " - товар со скидкой создан");
+        } catch (IllegalArgumentException e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+        printSeparator();
+        try {
+            Product productExc3 = new DiscountedProduct("Телефон", 50000, -50);
+            System.out.println(productExc3.getName() + " - товар со скидкой создан");
+        } catch (IllegalArgumentException e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+        printSeparator();
+        try {
+            Product productExc4 = new SimpleProduct("         ", 10000);
+            System.out.println(productExc4.getName() + " - товар со скидкой создан");
+        } catch (IllegalArgumentException e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+        printSeparator();
+
+        //Поиск наиболее повторяющегося фрагмента текста
+        //Текст компьютерной клавиатуры содержит 5 повторений по, текст про мебель - 2 повторений по
+        try {
+            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"по\") = " + searchList.getSearchableWithMaxRepetitionOf("по"));
+        } catch (BestResultNotFound b) {
+            System.out.println(b.getMessage());
+        }
+        printSeparator();
+        //Поиск несуществующего фрагмента текста
+        try {
+            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"вапвап\") = " + searchList.getSearchableWithMaxRepetitionOf("вапвап"));
+        } catch (BestResultNotFound b) {
+            System.out.println(b.getMessage());
+        }
+        printSeparator();
+        //Поиск с пустой строкой
+        printSeparator();
+        try{
+            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"   \") = " + searchList.getSearchableWithMaxRepetitionOf("   "));
+        }catch(BestResultNotFound b){
+            System.out.println(b.getMessage());
+        }
+        printSeparator();
     }
-    public static void printSeparator(){
-        System.out.println("==========");
-    }
-    public static void printSearch(String stringForSearch, SearchEngine searchList){
-        System.out.println("Использование метода search с параметром \""+stringForSearch+"\"");
-        Searchable[] resultsOfSearch = searchList.search(stringForSearch);
+        public static void printSeparator(){
+            System.out.println("==========");
+        }
+
+        public static void printSearch (String stringForSearch, SearchEngine searchList) {
+            System.out.println("Использование метода search с параметром \"" + stringForSearch + "\"");
+            Searchable[] resultsOfSearch = searchList.search(stringForSearch);
             boolean resultExist = false;
-        for(Searchable result:resultsOfSearch){
-            if(result != null) {
-                System.out.println("----------");
-                result.getStringRepresentation();
-                resultExist = true;
+            for (Searchable result : resultsOfSearch) {
+                if (result != null) {
+                    System.out.println("----------");
+                    result.getStringRepresentation();
+                    resultExist = true;
+                }
+            }
+            if (!resultExist) {
+                System.out.println("Ничего не найдено");
             }
         }
-        if(!resultExist){
-            System.out.println("Ничего не найдено");
-        }
     }
-}
