@@ -44,7 +44,7 @@ public class SearchEngine {
     }
 
     //Реализуйте в классе SearchEngine метод, который находит среди объектов Searchable наиболее подходящий к поисковой строке и возвращает его.
-    //Метод должен принимать строку search, а возвращать объект Searchable.
+    //Метод должен принимать строку search, а возвращать объект Searchable
     public Searchable getSearchableWithMaxRepetitionOf(String search) throws BestResultNotFound {
         if(search.isBlank()){
             throw new BestResultNotFound("Поисковый запрос состоит из пробелов или пуст");
