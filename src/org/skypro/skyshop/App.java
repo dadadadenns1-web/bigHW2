@@ -12,7 +12,7 @@ import org.skypro.skyshop.product.searchEngine.Searchable;
 
 public class App {
     public static void main(String[] args) {
-        //Создание продуктов
+        //Создание продуктов.
         //Создайте в методе main несколько товаров специальных типов вместо SimpleProduct
         DiscountedProduct discounted = new DiscountedProduct("Диван", 10000, 20);
         SimpleProduct simpleProduct = new SimpleProduct("Кресло", 5000);
@@ -155,7 +155,7 @@ public class App {
         //Поиск наиболее повторяющегося фрагмента текста
         //Текст компьютерной клавиатуры содержит 5 повторений по, текст про мебель - 2 повторений по
         try {
-            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"по\") = " + searchList.getSearchableWithMaxRepetitionOf("по"));
+            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"по\") = " + searchList.getSearchableWithMaxRepetitionOf("по").getSearchTerm());
         } catch (BestResultNotFound b) {
             System.out.println(b.getMessage());
         }
@@ -163,7 +163,7 @@ public class App {
 
         //Поиск несуществующего фрагмента текста
         try {
-            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"вапвап\") = " + searchList.getSearchableWithMaxRepetitionOf("вапвап"));
+            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"вапвап\") = " + searchList.getSearchableWithMaxRepetitionOf("вапвап").getSearchTerm());
         } catch (BestResultNotFound b) {
             System.out.println(b.getMessage());
         }
@@ -171,7 +171,7 @@ public class App {
 
         //Поиск с пустой строкой
         try{
-            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"   \") = " + searchList.getSearchableWithMaxRepetitionOf("   "));
+            System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"   \") = " + searchList.getSearchableWithMaxRepetitionOf("   ").getSearchTerm());
         }catch(BestResultNotFound b){
             System.out.println(b.getMessage());
         }
