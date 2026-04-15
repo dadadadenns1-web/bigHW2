@@ -47,7 +47,7 @@ public class SearchEngine {
     //Метод должен принимать строку search, а возвращать объект Searchable.
     public Searchable getSearchableWithMaxRepetitionOf(String search) throws BestResultNotFound {
         if(search.isBlank()){
-            throw new BestResultNotFound("Поисковый запрос состоит из пробелов");
+            throw new BestResultNotFound("Поисковый запрос состоит из пробелов или пуст");
         }
         String subString = search.toLowerCase();
         int searchableIndex = -1;//Для того чтобы понять какой объект по списку
