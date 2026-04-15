@@ -31,6 +31,7 @@ public class App {
         }//Добавление продукта в заполненную корзину, в которой нет свободного места
         printSeparator();
 
+
         ProductBasket basketTwo = new ProductBasket();//Для демонстрации классов можно создать несколько корзин.
         basketTwo.addProduct(productList[5]);
         basketTwo.addProduct(productList[3]);
@@ -40,30 +41,35 @@ public class App {
         basketTwo.printProducts();//Печать содержимого корзины с несколькими товарами.
         printSeparator();
 
+
         System.out.println("Получение стоимости корзины");
         int totalPrice = basketTwo.calculateTotalPrice();//Получение стоимости корзины с несколькими товарами.
         System.out.println("totalPrice = " + totalPrice);
         printSeparator();
+
 
         System.out.println("Поиск товара findProduct true/false");
         System.out.println(basketTwo.findProduct("Подушка"));//Поиск товара, который есть в корзине.
         System.out.println(basketTwo.findProduct("Матрас"));//Поиск товара, которого нет в корзине.
         printSeparator();
 
-        basket.cleanBasket();//Очистка корзины.
 
+        basket.cleanBasket();//Очистка корзины.
         System.out.println("Печать содержимого пустой корзины");
         basket.printProducts();//Печать содержимого пустой корзины.
         printSeparator();
+
 
         System.out.println("Получение стоимости пустой корзины");
         totalPrice = basket.calculateTotalPrice();//Получение стоимости пустой корзины.
         System.out.println("totalPrice = " + totalPrice);
         printSeparator();
 
+
         System.out.println("Поиск товара в пустой корзине");
         System.out.println(basket.findProduct("Подушка"));//Поиск товара по имени в пустой корзине.
         printSeparator();
+
 
         //Создайте один объект типа SearchEngine и добавьте в него все товары, которые создаются для проверки других методов.
         SearchEngine searchList = new SearchEngine(15);
@@ -88,6 +94,7 @@ public class App {
         for (Product product : productList) {
             searchList.add(product);
         }
+
         printSearch("ст", searchList);
         printSeparator();
         printSearch("", searchList);
@@ -95,10 +102,12 @@ public class App {
         printSearch("абвгд", searchList);
         printSeparator();
 
+
         //Проверка toString у класса Article
         System.out.println("Проверка toString у класса Article");
         System.out.println(articleList[2]);
         printSeparator();
+
 
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used
         basket.addProduct(discounted);
@@ -110,6 +119,7 @@ public class App {
         basket.printProducts();
         printSeparator();
         //ДЕЙСТВИЯ ДЛЯ КОМПИЛЯЦИЙ БЕЗ WARNING is never used.
+
 
         //Проверка exception
         //В качестве обработки можно просто выводить сообщение из исключения.
@@ -124,6 +134,7 @@ public class App {
             System.out.println("e.getMessage() = " + e.getMessage());
         }
         printSeparator();
+
         try {
             Product productExc3 = new DiscountedProduct("Телефон", 50000, -50);
             System.out.println(productExc3.getName() + " - товар со скидкой создан");
@@ -131,6 +142,7 @@ public class App {
             System.out.println("e.getMessage() = " + e.getMessage());
         }
         printSeparator();
+
         try {
             Product productExc4 = new SimpleProduct("         ", 10000);
             System.out.println(productExc4.getName() + " - товар со скидкой создан");
@@ -138,6 +150,7 @@ public class App {
             System.out.println("e.getMessage() = " + e.getMessage());
         }
         printSeparator();
+
 
         //Поиск наиболее повторяющегося фрагмента текста
         //Текст компьютерной клавиатуры содержит 5 повторений по, текст про мебель - 2 повторений по
@@ -147,6 +160,7 @@ public class App {
             System.out.println(b.getMessage());
         }
         printSeparator();
+
         //Поиск несуществующего фрагмента текста
         try {
             System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"вапвап\") = " + searchList.getSearchableWithMaxRepetitionOf("вапвап"));
@@ -154,8 +168,8 @@ public class App {
             System.out.println(b.getMessage());
         }
         printSeparator();
+
         //Поиск с пустой строкой
-        printSeparator();
         try{
             System.out.println("searchList.getSearchableWithMaxRepetitionOf(\"   \") = " + searchList.getSearchableWithMaxRepetitionOf("   "));
         }catch(BestResultNotFound b){
@@ -163,6 +177,12 @@ public class App {
         }
         printSeparator();
     }
+
+
+
+
+
+
         public static void printSeparator(){
             System.out.println("==========");
         }
