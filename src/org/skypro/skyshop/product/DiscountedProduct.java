@@ -34,13 +34,14 @@ public class DiscountedProduct extends Product {
 
     //Сеттеры чтоб компилятор не жаловался на отсутствие final. По идее должны быть изменяемы
     public void setBasePrice(int basePrice) {
-        if(basePrice <= 0){
+        if (basePrice <= 0) {
             throw new IllegalArgumentException("Цена должна быть строго больше 0");//выброшено IllegalArgumentException
         }
         this.basePrice = basePrice;
     }
+
     public void setDiscountInPercentage(int discountInPercentage) {
-        if(discountInPercentage > 100 || discountInPercentage < 0){
+        if (discountInPercentage > 100 || discountInPercentage < 0) {
             throw new IllegalArgumentException("Правила для процента скидки — процент должен быть числом в диапазоне от 0 до 100 включительно");
         }
         this.discountInPercentage = discountInPercentage;

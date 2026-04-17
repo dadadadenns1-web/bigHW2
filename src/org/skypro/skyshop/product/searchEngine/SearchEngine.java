@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SearchEngine {
-    private final ArrayList<Searchable> searchables;//массив всех элементов, по которым можно искать.
+    private final List<Searchable> searchables;//массив всех элементов, по которым можно искать.
     //final по совету компилятора
 
     public SearchEngine() {
@@ -15,10 +15,14 @@ public class SearchEngine {
     //В классе SearchEngine поменяйте структуру данных с массива на список.
     //Измените метод поиска: он должен возвращать *все* подходящие результаты (а не 5 результатов, как раньше).
     public List<Searchable> search(String stringForSearch) {
+        if (stringForSearch == null) {
+            throw new IllegalArgumentException("Невозможно найти по null строке");
+        }
+        stringForSearch = stringForSearch.toLowerCase();
         List<Searchable> result = new LinkedList<>();
         for (Searchable searchable : searchables) {
             //брать у каждого элемента SearchTerm и искать по нему, используя встроенный метод строки contains
-            if (searchable.getSearchTerm().toLowerCase().contains(stringForSearch.toLowerCase())) {
+            if (searchable.getSearchTerm().toLowerCase().contains(stringForSearch)) {
                 result.add(searchable);
             }
         }
@@ -27,7 +31,7 @@ public class SearchEngine {
 
     //Метод add() — добавляет новый объект типа Searchable в массив поискового движка.
     public void add(Searchable searchable) {
-        if(searchable == null){
+        if (searchable == null) {
             throw new IllegalArgumentException("Невозможно добавить null в список объекта SearchEngine");
         }
         searchables.add(searchable);
@@ -36,7 +40,10 @@ public class SearchEngine {
     //Реализуйте в классе SearchEngine метод, который находит среди объектов Searchable наиболее подходящий к поисковой строке и возвращает его.
     //Метод должен принимать строку search, а возвращать объект Searchable
     public Searchable getSearchableWithMaxRepetitionOf(String search) throws BestResultNotFound {
-        if(search.isBlank()){
+        if (search == null) {
+            throw new IllegalArgumentException("Невозможно найти по null строке");
+        }
+        if (search.isBlank()) {
             throw new BestResultNotFound("Поисковый запрос состоит из пробелов или пуст");
         }
         String subString = search.toLowerCase();

@@ -77,7 +77,7 @@ public class App {
 
         //Создайте несколько объектов типа Article и добавьте их в Search Engine.
         Article[] articleList = {
-                new Article("Твердотельный накопитель","Твердотельный накопитель (англ. solid-state drive, SSD)" +
+                new Article("Твердотельный накопитель", "Твердотельный накопитель (англ. solid-state drive, SSD)" +
                         " — компьютерное энергонезависимое не механическое запоминающее устройство на основе микросхем памяти," +
                         " альтернатива жёстким дискам (HDD). Наиболее распространённый вид твердотельных накопителей использует" +
                         " для хранения данных флеш-память типа NAND, однако существуют варианты, в которых накопитель создаётся" +
@@ -224,7 +224,7 @@ public class App {
         }
     }
 
-    public static void printLittleSeparator(){
+    public static void printLittleSeparator() {
         System.out.println("----------");
     }
 
@@ -239,7 +239,7 @@ public class App {
         for (Searchable result : resultsOfSearch) {
             if (result != null) {
                 System.out.println("----------");
-                result.getStringRepresentation();
+                result.printStringRepresentation();
                 resultExist = true;
             }
         }

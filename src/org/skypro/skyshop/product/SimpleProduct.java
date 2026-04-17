@@ -29,7 +29,7 @@ public class SimpleProduct extends Product {
 
     //Сеттер чтоб не жаловался компилятор. По идее цена должна быть изменяемой
     public void setPrice(int price) {
-        if(price <= 0){
+        if (price <= 0) {
             throw new IllegalArgumentException("Цена должна быть строго больше 0");//выброшено IllegalArgumentException
         }
         this.price = price;
