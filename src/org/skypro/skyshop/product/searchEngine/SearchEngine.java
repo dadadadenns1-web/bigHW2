@@ -9,7 +9,7 @@ public class SearchEngine {
     //final по совету компилятора
 
     public SearchEngine() {
-        searchables = new ArrayList<>();
+        searchables = new LinkedList<>();
     }
 
     //В классе SearchEngine поменяйте структуру данных с массива на список.
