@@ -2,19 +2,15 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.Iterator;
-
-import java.util.LinkedList;
-
-import java.util.List;
+import java.util.*;
 
 public class ProductBasket {
     //Поменяйте используемую структуру данных в классе ProductBasket с массива на список
     //Учитывайте, что мы не обращаемся к элементам корзины по индексам, а только добавляем и удаляем элементы, не используя их индексы.
-    private final List<Product> basket;//прямой доступ к этому массиву должен быть невозможен.
+    private final Map<String, List<Product>> basket;//прямой доступ к этому массиву должен быть невозможен.
 
     public ProductBasket() {
-        basket = new LinkedList<>();
+        basket = new HashMap<>();
     }
 
     //Метод добавления продукта в корзину: метод принимает в себя продукт и ничего не возвращает.
@@ -23,23 +19,19 @@ public class ProductBasket {
         if (product == null) {
             throw new IllegalArgumentException("Невозможно добавить null в корзину");
         }
-        basket.add(product);
+        basket.computeIfAbsent(product.getName().toLowerCase(),k -> new LinkedList<>()).add(product);//ключ приводится к lowerCase, в случае отсутствия список создается через computeIfAbsent
     }
 
     //Теперь добавьте метод, который по переданному имени продукта удаляет все продукты с таким именем из корзины:
     //Метод должен принимать строку name и возвращать список (List) удаленных продуктов, и метод не использует индекс.
     //Если продукта нет в корзине, то возвращаемый список должен быть пустым.
-    public List<Product> deleteProductByName(String name) {
+    public List<Product> deleteProductsByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Имя продукта не может быть null");
         }
-        List<Product> deletedProducts = new LinkedList<>();
-        for (Iterator<Product> iterator = basket.iterator(); iterator.hasNext(); ) {
-            Product product = iterator.next();
-            if (product.getName().equalsIgnoreCase(name)) {
-                deletedProducts.add(product);
-                iterator.remove();
-            }
+        List<Product> deletedProducts = basket.remove(name.toLowerCase());//При удалении продукта из корзины происходит вызов метода remove по ключу
+        if (deletedProducts == null){
+            deletedProducts = new LinkedList<>();
         }
         return deletedProducts;
     }
@@ -47,8 +39,10 @@ public class ProductBasket {
     //Метод получения общей стоимости корзины: метод ничего не принимает и возвращает целое число.
     public int calculateTotalPrice() {
         int total = 0;
-        for (Product product : basket) {
-            total += product.getPrice();
+        for (List<Product> products : basket.values()) {
+            for (Product product: products){
+                total += product.getPrice();
+            }
         }
         return total;
     }
@@ -56,9 +50,11 @@ public class ProductBasket {
     //Количество специальных товаров, подсчет идет через выделенный метод
     public int calculateSpecialProducts() {
         int total = 0;
-        for (Product product : basket) {
-            if (product.isSpecial()) {
-                total += 1;
+        for (List<Product> products : basket.values()) {
+            for (Product product : products) {
+                if (product.isSpecial()) {
+                    total += 1;
+                }
             }
         }
         return total;
@@ -69,8 +65,10 @@ public class ProductBasket {
             System.out.println("в корзине пусто");//Если в корзине ничего нет, нужно напечатать фразу «в корзине пусто».
             return;
         }
-        for (Product product : basket) {
-            System.out.println(product);//Все товары выводятся через toString()
+        for (List<Product> products : basket.values()) {
+            for (Product product : products) {
+                System.out.println(product);//Все товары выводятся через toString()
+            }
         }
         System.out.println("Итого: " + calculateTotalPrice());
         System.out.println("Специальных товаров: " + calculateSpecialProducts());
@@ -89,12 +87,7 @@ public class ProductBasket {
         if (nameForSearch == null) {
             throw new IllegalArgumentException("Имя находимого продукта не может быть null");
         }
-        for (Product product : basket) {
-            if (product.getName().equalsIgnoreCase(nameForSearch)) {
-                return true;
-            }
-        }
-        return false;
+        return basket.get(nameForSearch.toLowerCase()) != null;
     }
 
     //Метод очистки корзины: метод ничего не принимает и очищает массив. Теперь null не проставляет, так как не допускает null в списке

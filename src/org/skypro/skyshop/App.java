@@ -11,6 +11,7 @@ import org.skypro.skyshop.product.searchEngine.SearchEngine;
 import org.skypro.skyshop.product.searchEngine.Searchable;
 
 import java.util.List;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
@@ -216,7 +217,7 @@ public class App {
 
 
     public static void deleteAndPrintProduct(String name, ProductBasket basket) {
-        List<Product> deletedProducts = basket.deleteProductByName(name);
+        List<Product> deletedProducts = basket.deleteProductsByName(name);
         if (deletedProducts.isEmpty()) {
             System.out.println("Список пуст");//Проверить, что список удаленных продуктов пустой и вывести сообщение “Список пуст”.
         } else {
@@ -234,17 +235,16 @@ public class App {
 
     public static void printSearch(String stringForSearch, SearchEngine searchList) {
         System.out.println("<<Использование метода search с параметром \"" + stringForSearch + "\">>");
-        List<Searchable> resultsOfSearch = searchList.search(stringForSearch);
-        boolean resultExist = false;
-        for (Searchable result : resultsOfSearch) {
-            if (result != null) {
-                System.out.println("----------");
-                result.printStringRepresentation();
-                resultExist = true;
-            }
-        }
-        if (!resultExist) {
+        Map<String, Searchable> resultsOfSearch = searchList.search(stringForSearch);
+        if(resultsOfSearch.isEmpty()){
             System.out.println("Ничего не найдено");
+            return;
+        }
+        for (Searchable result : resultsOfSearch.values()) {//Все элементы выводятся в алфавитном порядке за счет вызова values() на результате метода поиска
+            if (result != null) {
+                printLittleSeparator();
+                result.printStringRepresentation();
+            }
         }
     }
 }

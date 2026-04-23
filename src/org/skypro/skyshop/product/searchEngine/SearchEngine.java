@@ -2,6 +2,8 @@ package org.skypro.skyshop.product.searchEngine;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
     private final List<Searchable> searchables;//массив всех элементов, по которым можно искать.
@@ -13,16 +15,19 @@ public class SearchEngine {
 
     //В классе SearchEngine поменяйте структуру данных с массива на список.
     //Измените метод поиска: он должен возвращать *все* подходящие результаты (а не 5 результатов, как раньше).
-    public List<Searchable> search(String stringForSearch) {
+    //В классе поискового движка вам нужно модифицировать метод поиска таким образом, чтобы он возвращал отсортированную по именам мапу:
+    //с ключом — именем Searchable-объекта и значением — самим Searchable-объектом.
+    public Map<String,Searchable> search(String stringForSearch) {
         if (stringForSearch == null) {
             throw new IllegalArgumentException("Невозможно найти по null строке");
         }
         stringForSearch = stringForSearch.toLowerCase();
-        List<Searchable> result = new LinkedList<>();
+
+        Map<String,Searchable> result = new TreeMap<>();  //Метод возвращает TreeMap, где каждый ключ соответствует уникальному имени объекта
         for (Searchable searchable : searchables) {
             //брать у каждого элемента SearchTerm и искать по нему, используя встроенный метод строки contains
             if (searchable.getSearchTerm().toLowerCase().contains(stringForSearch)) {
-                result.add(searchable);
+                result.put(searchable.getName(),searchable);
             }
         }
         return result;
@@ -46,7 +51,7 @@ public class SearchEngine {
             throw new BestResultNotFound("Поисковый запрос состоит из пробелов или пуст");
         }
         String subString = search.toLowerCase();
-        int maxSubStringRepeatCounter = 0;//Максимальное количество повторений
+        int maxSubstringRepeatCounter = 0;//Максимальное количество повторений
         Searchable theBestResult = null;
         for (Searchable searchable : searchables) {
             String searchableTerm = searchable.getSearchTerm().toLowerCase();
@@ -57,9 +62,9 @@ public class SearchEngine {
                 int nextSearchIndex = foundIndex + subString.length();
                 foundIndex = searchableTerm.indexOf(subString, nextSearchIndex);
             }
-            if (subStringRepeatCounter > maxSubStringRepeatCounter) {
+            if (subStringRepeatCounter > maxSubstringRepeatCounter) {
                 theBestResult = searchable;
-                maxSubStringRepeatCounter = subStringRepeatCounter;
+                maxSubstringRepeatCounter = subStringRepeatCounter;
             }
         }
         if (theBestResult == null) {
