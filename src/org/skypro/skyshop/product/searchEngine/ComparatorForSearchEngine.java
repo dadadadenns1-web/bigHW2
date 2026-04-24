@@ -11,9 +11,10 @@ public class ComparatorForSearchEngine implements Comparator<Searchable> {
         String o1Name = o1.getName().toLowerCase();
         String o2Name = o2.getName().toLowerCase();
         int nameLengthDiff = Integer.compare(o2Name.length(), o1Name.length());
-        if(nameLengthDiff == 0){//Если значение, которое вернул Integer.compare == 0, тогда нужно сравнивать имена, используя методы compareTo.
+        if (nameLengthDiff == 0) {//Если значение, которое вернул Integer.compare == 0, тогда нужно сравнивать имена, используя методы compareTo.
             return o1Name.compareTo(o2Name);
+        } else {
+            return nameLengthDiff;
         }
-        return nameLengthDiff;
     }
 }

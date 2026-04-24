@@ -51,17 +51,18 @@ public final class Article implements Searchable {
     //написать реализацию методов equals и hashCode для классов, которые добавляются в SearchEngine — абстрактного класса Product и класса Article.
     @Override
     public boolean equals(Object obj) {
-        if(obj == this){
+        if (obj == this) {
             return true;
         }
-        if(obj == null){
+        if (obj == null) {
             return false;
         }
-        if(!(obj instanceof Article)){
+        if (!(obj instanceof Article)) {
             return false;
         }
-        return Objects.equals(getName().toLowerCase(),((Article) obj).getName().toLowerCase());//через Objects.equals(name1, name2)
+        return Objects.equals(getName().toLowerCase(), ((Article) obj).getName().toLowerCase());//через Objects.equals(name1, name2)
     }
+
     @Override
     public int hashCode() {
         return getName().toLowerCase().hashCode();

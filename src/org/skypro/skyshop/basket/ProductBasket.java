@@ -19,7 +19,7 @@ public class ProductBasket {
         if (product == null) {
             throw new IllegalArgumentException("Невозможно добавить null в корзину");
         }
-        basket.computeIfAbsent(product.getName().toLowerCase(),k -> new LinkedList<>()).add(product);//ключ приводится к lowerCase, в случае отсутствия список создается через computeIfAbsent
+        basket.computeIfAbsent(product.getName().toLowerCase(), k -> new LinkedList<>()).add(product);//ключ приводится к lowerCase, в случае отсутствия список создается через computeIfAbsent
     }
 
     //Теперь добавьте метод, который по переданному имени продукта удаляет все продукты с таким именем из корзины:
@@ -30,7 +30,7 @@ public class ProductBasket {
             throw new IllegalArgumentException("Имя продукта не может быть null");
         }
         List<Product> deletedProducts = basket.remove(name.toLowerCase());//При удалении продукта из корзины происходит вызов метода remove по ключу
-        if (deletedProducts == null){
+        if (deletedProducts == null) {
             deletedProducts = new LinkedList<>();
         }
         return deletedProducts;
@@ -40,7 +40,7 @@ public class ProductBasket {
     public int calculateTotalPrice() {
         int total = 0;
         for (List<Product> products : basket.values()) {
-            for (Product product: products){
+            for (Product product : products) {
                 total += product.getPrice();
             }
         }

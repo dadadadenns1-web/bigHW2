@@ -54,7 +54,7 @@ public abstract class Product implements Searchable {
         if (!(obj instanceof Product)) {
             return false;
         }
-        return Objects.equals(getName().toLowerCase(),((Product) obj).getName().toLowerCase());//через Objects.equals(name1, name2)
+        return Objects.equals(getName().toLowerCase(), ((Product) obj).getName().toLowerCase());//через Objects.equals(name1, name2)
     }
 
     @Override

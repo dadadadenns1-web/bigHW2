@@ -28,7 +28,7 @@ public class App {
                 new SimpleProduct("Подушка", 3000),
                 new SimpleProduct("Подушка", 3000), //Проверка дубликата
                 new SimpleProduct("Авто", 500_000),
-                new SimpleProduct("Баян",50_000)
+                new SimpleProduct("Баян", 50_000)
         );
         ProductBasket basket = new ProductBasket();
         for (Product product : productList) {//Добавление продукта в корзину
