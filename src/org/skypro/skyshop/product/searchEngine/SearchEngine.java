@@ -1,33 +1,27 @@
 package org.skypro.skyshop.product.searchEngine;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
-    private final List<Searchable> searchables;//массив всех элементов, по которым можно искать.
+    //нужно применить Set
+    private final Set<Searchable> searchables;//массив всех элементов, по которым можно искать.
     //final по совету компилятора
 
     public SearchEngine() {
-        searchables = new LinkedList<>();
+        searchables = new HashSet<>();
     }
 
-    //В классе SearchEngine поменяйте структуру данных с массива на список.
-    //Измените метод поиска: он должен возвращать *все* подходящие результаты (а не 5 результатов, как раньше).
-    //В классе поискового движка вам нужно модифицировать метод поиска таким образом, чтобы он возвращал отсортированную по именам мапу:
-    //с ключом — именем Searchable-объекта и значением — самим Searchable-объектом.
-    public Map<String,Searchable> search(String stringForSearch) {
+    public Set<Searchable> search(String stringForSearch) {
         if (stringForSearch == null) {
             throw new IllegalArgumentException("Невозможно найти по null строке");
         }
         stringForSearch = stringForSearch.toLowerCase();
 
-        Map<String,Searchable> result = new TreeMap<>();  //Метод возвращает TreeMap, где каждый ключ соответствует уникальному имени объекта
+        Set<Searchable> result = new TreeSet<>(new ComparatorForSearchEngine());  //На этот раз будем выдавать отсортированный Set из Searchable-элементов.
         for (Searchable searchable : searchables) {
             //брать у каждого элемента SearchTerm и искать по нему, используя встроенный метод строки contains
             if (searchable.getSearchTerm().toLowerCase().contains(stringForSearch)) {
-                result.put(searchable.getName(),searchable);
+                result.add(searchable);
             }
         }
         return result;

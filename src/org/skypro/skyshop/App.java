@@ -11,7 +11,7 @@ import org.skypro.skyshop.product.searchEngine.SearchEngine;
 import org.skypro.skyshop.product.searchEngine.Searchable;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
@@ -19,14 +19,17 @@ public class App {
         //Создайте в методе main несколько товаров специальных типов вместо SimpleProduct
         DiscountedProduct discounted = new DiscountedProduct("Диван", 10000, 20);
         SimpleProduct simpleProduct = new SimpleProduct("Кресло", 5000);
-        Product[] productList = {
+        List<Product> productList = List.of(
                 simpleProduct,
                 discounted,
                 new DiscountedProduct("Стол", 8000, 50),
                 new FixPriceProduct("Табурет"),
                 new SimpleProduct("Матрас", 15000),
                 new SimpleProduct("Подушка", 3000),
-        };
+                new SimpleProduct("Подушка", 3000), //Проверка дубликата
+                new SimpleProduct("Авто", 500_000),
+                new SimpleProduct("Баян",50_000)
+        );
         ProductBasket basket = new ProductBasket();
         for (Product product : productList) {//Добавление продукта в корзину
             basket.addProduct(product);
@@ -34,9 +37,9 @@ public class App {
 
 
         ProductBasket basketTwo = new ProductBasket();//Для демонстрации классов можно создать несколько корзин.
-        basketTwo.addProduct(productList[5]);
-        basketTwo.addProduct(productList[3]);
-        basketTwo.addProduct(productList[1]);
+        basketTwo.addProduct(productList.get(5));
+        basketTwo.addProduct(productList.get(3));
+        basketTwo.addProduct(productList.get(1));
 
         System.out.println("Проверка простых методов корзины");
         System.out.println("Печать содержимого с несколькими товарами");
@@ -77,7 +80,7 @@ public class App {
         SearchEngine searchList = new SearchEngine();
 
         //Создайте несколько объектов типа Article и добавьте их в Search Engine.
-        Article[] articleList = {
+        List<Article> articleList = List.of(
                 new Article("Твердотельный накопитель", "Твердотельный накопитель (англ. solid-state drive, SSD)" +
                         " — компьютерное энергонезависимое не механическое запоминающее устройство на основе микросхем памяти," +
                         " альтернатива жёстким дискам (HDD). Наиболее распространённый вид твердотельных накопителей использует" +
@@ -97,15 +100,19 @@ public class App {
                         " тензометрическим джойстиком или трекболом."),
                 new Article("Мебель", "Ме́бель (фр. meuble, от лат. mobile — движимый, подвижный)" +
                         " — совокупность передвижных или встроенных изделий для обстановки жилых и" +
-                        " общественных помещений и различных зон пребывания человека[1].")
-        };
-        for (Article article : articleList) {
+                        " общественных помещений и различных зон пребывания человека[1]."),
+                new Article("Мебель", "Ме́бель (фр. meuble, от лат. mobile — движимый, подвижный)" +
+                        " — совокупность передвижных или встроенных изделий для обстановки жилых и" +
+                        " общественных помещений и различных зон пребывания человека[1].")//Проверка дубликата
+        );
+        for (Searchable article : articleList) {
             searchList.add(article);
         }
         //Добавление не включенное в условие, но предусмотренное для класса Product
-        for (Product product : productList) {
+        for (Searchable product : productList) {
             searchList.add(product);
         }
+
 
         System.out.println("Часть с проверкой search в листе с searchable");
         printSearch("ст", searchList);
@@ -118,7 +125,7 @@ public class App {
 
         //Проверка toString у класса Article
         System.out.println("Проверка toString у класса Article");
-        System.out.println(articleList[2]);
+        System.out.println(articleList.get(2));
         printSeparator();
 
 
@@ -203,9 +210,9 @@ public class App {
         printLittleSeparator();
 
         System.out.println("Теперь добавим 3 стола");
-        basket.addProduct(productList[2]);
-        basket.addProduct(productList[2]);
-        basket.addProduct(productList[2]);
+        basket.addProduct(productList.get(2));
+        basket.addProduct(productList.get(2));
+        basket.addProduct(productList.get(2));
         basket.printBasket();
         printLittleSeparator();
 
@@ -235,12 +242,12 @@ public class App {
 
     public static void printSearch(String stringForSearch, SearchEngine searchList) {
         System.out.println("<<Использование метода search с параметром \"" + stringForSearch + "\">>");
-        Map<String, Searchable> resultsOfSearch = searchList.search(stringForSearch);
-        if(resultsOfSearch.isEmpty()){
+        Set<Searchable> resultsOfSearch = searchList.search(stringForSearch);
+        if (resultsOfSearch.isEmpty()) {
             System.out.println("Ничего не найдено");
             return;
         }
-        for (Searchable result : resultsOfSearch.values()) {//Все элементы выводятся в алфавитном порядке за счет вызова values() на результате метода поиска
+        for (Searchable result : resultsOfSearch) {
             if (result != null) {
                 printLittleSeparator();
                 result.printStringRepresentation();

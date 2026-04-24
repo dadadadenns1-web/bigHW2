@@ -2,10 +2,12 @@ package org.skypro.skyshop.product.article;
 
 import org.skypro.skyshop.product.searchEngine.Searchable;
 
+import java.util.Objects;
+
 //Объектная модель статьи о товарах.
 //Для этого создайте класс Article
 //который будет не модифицируемым, как и класс товара, и будет содержать такой набор полей:
-public class Article implements Searchable {
+public final class Article implements Searchable {
     private final String title;//название статьи в виде строки
     private final String text;//текст статьи в виде строки
 
@@ -46,5 +48,23 @@ public class Article implements Searchable {
         return "ARTICLE";
     }
 
+    //написать реализацию методов equals и hashCode для классов, которые добавляются в SearchEngine — абстрактного класса Product и класса Article.
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this){
+            return true;
+        }
+        if(obj == null){
+            return false;
+        }
+        if(!(obj instanceof Article)){
+            return false;
+        }
+        return Objects.equals(getName().toLowerCase(),((Article) obj).getName().toLowerCase());//через Objects.equals(name1, name2)
+    }
+    @Override
+    public int hashCode() {
+        return getName().toLowerCase().hashCode();
+    }
 
 }
