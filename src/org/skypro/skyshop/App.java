@@ -228,7 +228,7 @@ public class App {
         if (deletedProducts.isEmpty()) {
             System.out.println("Список пуст");//Проверить, что список удаленных продуктов пустой и вывести сообщение “Список пуст”.
         } else {
-            System.out.println("deletedProducts = " + deletedProducts);//Вывести удаленные продукты на экран.
+            System.out.println("deletedProducts = " + deletedProducts);//Вывести удаленные продукты на экран
         }
     }
 
