@@ -1,6 +1,7 @@
 package org.skypro.skyshop.product.searchEngine;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
     //нужно применить Set
@@ -11,21 +12,19 @@ public class SearchEngine {
         searchables = new HashSet<>();
     }
 
+    //Метод search не должен использовать циклы — перепишите его одним стримом
+    // с использованием промежуточной операции filter и терминальной операции collect.
     public Set<Searchable> search(String stringForSearch) {
-        if (stringForSearch == null) {
-            throw new IllegalArgumentException("Невозможно найти по null строке");
+        if (stringForSearch == null || stringForSearch.isBlank()) {
+            throw new IllegalArgumentException("Невозможно найти по null строке или пустой строке");
         }
-        stringForSearch = stringForSearch.toLowerCase();
-
-        Set<Searchable> result = new TreeSet<>(new ComparatorForSearchEngine());  //На этот раз будем выдавать отсортированный Set из Searchable-элементов.
-        for (Searchable searchable : searchables) {
-            //брать у каждого элемента SearchTerm и искать по нему, используя встроенный метод строки contains
-            if (searchable.getSearchTerm().toLowerCase().contains(stringForSearch)) {
-                result.add(searchable);
-            }
-        }
-        return result;
+        final String finalStringForSearch = stringForSearch.toLowerCase(Locale.ROOT);
+        return searchables.stream() //На этот раз будем выдавать отсортированный Set из Searchable-элементов.
+                .filter(m -> m.getSearchTerm().toLowerCase(Locale.ROOT).contains(finalStringForSearch))
+                .collect(Collectors.toCollection(() -> new TreeSet<Searchable>(new ComparatorForSearchEngine())));//Использован Collectors.toCollection(() → new TreeSet<>(компаратор))
+        //Метод search реализован одним стримом с filter и collect, циклы отсутствуют
     }
+
 
     //Метод add() — добавляет новый объект типа Searchable в массив поискового движка.
     public void add(Searchable searchable) {

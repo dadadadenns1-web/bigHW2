@@ -4,6 +4,8 @@ import org.skypro.skyshop.product.Product;
 
 import java.util.*;
 
+//В классах корзины вам нужно заменить циклы на StreamAPI
+
 public class ProductBasket {
     //Поменяйте используемую структуру данных в классе ProductBasket с массива на список
     //Учитывайте, что мы не обращаемся к элементам корзины по индексам, а только добавляем и удаляем элементы, не используя их индексы.
@@ -38,40 +40,30 @@ public class ProductBasket {
 
     //Метод получения общей стоимости корзины: метод ничего не принимает и возвращает целое число.
     public int calculateTotalPrice() {
-        int total = 0;
-        for (List<Product> products : basket.values()) {
-            for (Product product : products) {
-                total += product.getPrice();
-            }
-        }
-        return total;
+        return basket.values().stream()
+                .flatMap(List::stream)//Используется flatMap для преобразования потока.
+                .mapToInt(Product::getPrice)// Для подсчета суммы используется mapToInt и sum
+                .sum();
     }
 
     //Количество специальных товаров, подсчет идет через выделенный метод
-    public int calculateSpecialProducts() {
-        int total = 0;
-        for (List<Product> products : basket.values()) {
-            for (Product product : products) {
-                if (product.isSpecial()) {
-                    total += 1;
-                }
-            }
-        }
-        return total;
+    //Подсчет выделен в метод: private long getSpecialCount() { return ...filter(...).count(); }
+    private long getSpecialCount() {
+        return basket.values().stream()
+                .flatMap(list -> list.stream().filter(Product::isSpecial))
+                .count();
     }
+
 
     public void printBasket() {
         if (basket.isEmpty()) {
             System.out.println("в корзине пусто");//Если в корзине ничего нет, нужно напечатать фразу «в корзине пусто».
             return;
-        }
-        for (List<Product> products : basket.values()) {
-            for (Product product : products) {
-                System.out.println(product);//Все товары выводятся через toString()
-            }
-        }
+        }//Вывод корзины реализован через flatMap и forEach, циклы отсутствуют
+        basket.values().stream().flatMap(List::stream).forEach(System.out::println);
+
         System.out.println("Итого: " + calculateTotalPrice());
-        System.out.println("Специальных товаров: " + calculateSpecialProducts());
+        System.out.println("Специальных товаров: " + getSpecialCount());
     }
     //КАК ДОЛЖНО ВЫВОДИТЬСЯ
     //<имя продукта>: <стоимость>
